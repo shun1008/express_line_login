@@ -1,0 +1,280 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+   
+</head>
+
+<body>
+    <div id="app">
+
+        <!--Add Modal -->
+        <div class="modal fade" id="addStoreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">新增店家</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addStoreForm">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="addName">名稱</label>
+                                    <input type="text" name="name" class="form-control" id="addName">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="addAddress">地址</label>
+                                    <input type="text" name="address" class="form-control" id="addAddress">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="addTel">電話</label>
+                                    <input type="text" name="tel" class="form-control" id="addTel">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="addManager">負責人</label>
+                                    <input type="text" name="manager" class="form-control" id="addManager">
+                                </div>
+                            </div>
+
+
+                        </form>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="addEventBtn" @click="create">新增店家</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Update Modal -->
+        <div class="modal fade" id="updStoreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">修改店家資訊</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="updStoreForm">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="updName">名稱</label>
+                                    <input type="text" name="name" class="form-control" id="updName">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="updAddress">地址</label>
+                                    <input type="text" name="address" class="form-control" id="updAddress">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="updTel">電話</label>
+                                    <input type="text" name="tel" class="form-control" id="updTel">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="updManager">負責人</label>
+                                    <input type="text" name="manager" class="form-control" id="updManager">
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="updEventBtn" @click="update">確認修改</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div>
+            
+            <nav class="navbar navbar-dark bg-dark navbar-expand-sm navbar-fixed-top">
+                <a class="navbar-brand" href="/">
+                    Zzaqz
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" >
+                   
+                    <ul class="navbar-nav">
+                        
+                    </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="<%= user.pictureUrl %>"
+                                    width="40" height="40" class="rounded-circle">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <img src="<%= user.pictureUrl %>" style="display:block; margin:auto;" width="60" height="60" class="rounded-circle">
+                                <a class="dropdown-item" href="#"><%= user.displayName %></a>
+                                <a class="dropdown-item" href="/line/logout">Log Out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+
+
+        <div class="container">
+
+            <!-- Button trigger modal -->
+
+            <div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addStoreModal">
+                    新增店家
+                </button>
+                <!-- <button type="button" class="btn btn-danger" id="del_event_btn">
+                    刪除店家
+                </button>
+                <a class="btn btn-outline-info" href="/line/logout">Logout</a> -->
+            </div>
+
+            <table class="table table-hover table-bordered display">
+                <thead>
+                    <tr>
+
+                        <!-- <th class="th-sm"><input type="checkbox" id="check_all" />
+                        </th> -->
+                        <!-- <th class="th-sm">index
+                        </th> -->
+                        <th class="th-sm">名稱
+                        </th>
+                        <th class="th-sm">地址
+                        </th>
+                        <th class="th-sm">電話
+                        </th>
+                        <th class="th-sm">負責人
+                        </th>
+                        <th class="th-sm">操作
+                        </th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr v-for="(store, index) in stores">
+                        <!-- <td><input type="checkbox" class="checkbox" /></td> -->
+                        <!-- <td>{{index}}</td> -->
+                        <td>{{store.name}}</td>
+                        <td>{{store.address}}</td>
+                        <td>{{store.tel}}</td>
+                        <td>{{store.manager}}</td>
+                        <td>
+                            <button class="btn btn-success btn_icon" @click="edit(store)">
+                                <i class="far fa-edit"></i></button>
+                            <button class="btn btn-danger btn_icon" @click="remove(store)">
+                                <i class="far fa-trash-alt"></i></button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+    <script>
+        $.fn.serializeObject = function () {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function () {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+
+
+
+        new Vue({
+            el: '#app',
+            data: {
+                stores: []
+            },
+            methods: {
+                listAll: async function () {
+                    let res = await axios.get('/stores');
+                    this.stores = res.data;
+                },
+                create: async function () {
+                    $('#addStoreModal').modal('toggle');
+                    let store = $('#addStoreForm').serializeObject();
+                    let res = await axios.post('/stores', store);
+                    this.listAll();
+                },
+                remove: async function (store) {
+
+                    let name = store.name
+                    let res = await axios.delete('/stores/' + name);
+                    this.listAll();
+                },
+                update: async function () {
+                    $('#updStoreModal').modal('toggle');
+                    let store = $('#updStoreForm').serializeObject();
+                    let res = await axios.put('/stores/' + store.name, store);
+
+                    this.listAll();
+
+                },
+                edit: function (store) {
+
+                    $('#updName').val(store.name);
+                    $('#updAddress').val(store.address);
+                    $('#updTel').val(store.tel);
+                    $('#updManager').val(store.manager);
+                    $('#updStoreModal').modal('toggle');
+                }
+            },
+            beforeMount: function () {
+                this.listAll();
+            }
+        })
+
+        $('#addStoreModal').on('hidden.bs.modal', e => {
+            $(e.target).find('form').trigger('reset')
+        });
+
+
+    </script>
+</body>
+
+</html>

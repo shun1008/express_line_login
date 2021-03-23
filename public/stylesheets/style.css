@@ -1,0 +1,19 @@
+/* body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+} */
+
+.dropdown-menu {
+  max-width: 150px;
+  min-width:inherit;
+}
+
+.dropdown-menu li a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
